@@ -9,9 +9,6 @@ import javax.swing.*;
 public class DataLayer {
    /* Methods needed:
       Connect method - do we want a pop up?
-      faculty update
-         works
-         interests
       faculty delete
          works
          interests
@@ -28,6 +25,7 @@ public class DataLayer {
          works
          interests
       check user
+      register
       validate login
       create directions.txt
       main method and testing
@@ -141,6 +139,23 @@ public class DataLayer {
          stmt.executeUpdate();
       } catch (SQLException sqle) {
          System.out.println("ERROR IN METHOD facultyUpdateInterest()");
+         System.out.println("ERROR MESSAGE -> "+sqle);
+      }
+   }
+
+    /**
+    * Updates a users work
+    * @param userID the user
+    * @param desc the abstract to be changed
+    */
+    public void facultyUpdateWork (String userID, String desc) {
+      try {
+         PreparedStatement stmt = conn.prepareStatement("UPDATE user_interest SET abstract=? WHERE userID=?");
+         stmt.setString(1, desc);
+         stmt.setString(2, userID);
+         stmt.executeUpdate();
+      } catch (SQLException sqle) {
+         System.out.println("ERROR IN METHOD facultyUpdateWork()");
          System.out.println("ERROR MESSAGE -> "+sqle);
       }
    }
