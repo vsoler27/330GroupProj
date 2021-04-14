@@ -29,7 +29,8 @@ public class DataLayer {
          interests
       check user
       validate login
-
+      create directions.txt
+      main method and testing
    */
    private Connection conn;
    private ResultSet rs;
