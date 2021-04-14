@@ -27,6 +27,9 @@ public class DataLayer {
       student search 
          works
          interests
+      check user
+      validate login
+
    */
    private Connection conn;
    private ResultSet rs;
