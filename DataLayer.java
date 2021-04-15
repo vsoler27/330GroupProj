@@ -8,10 +8,6 @@ import javax.swing.*;
 
 public class DataLayer {
    /* Methods needed:
-      Connect method - do we want a pop up?
-      faculty delete
-         works
-         interests
       public view 
          works
          interests
@@ -160,5 +156,40 @@ public class DataLayer {
       }
    }
 
+   /**
+    * deletes an interest
+    * @param userID user removing the interest
+    * @param interestID the interest to be removed
+    */
+   public void facultyDeleteInterest (String userID, String interestID) {
+      try {
+         PreparedStatement stmt = conn.prepareStatement("DELETE FROM user_interests WHERE userID = ? AND interestID = ?");
+         stmt.setString(1, userID);
+         stmt.setString(2, interestID);
+         stmt.executeUpdate();
+      }
+      catch (SQLException sqle) {
+         System.out.println("ERROR IN METHOD facultyDeleteInterest()");
+         System.out.println("ERROR MESSAGE -> "+sqle);
+      }
+   }
+
+   /**
+    * deletes a work
+    * @param userID user removing the interest
+    * @param workID the work to be removed
+    */
+    public void facultyDeleteWork (String userID, String workID) {
+      try {
+         PreparedStatement stmt = conn.prepareStatement("DELETE FROM works WHERE userID = ? AND workID = ?");
+         stmt.setString(1, userID);
+         stmt.setString(2, workID);
+         stmt.executeUpdate();
+      }
+      catch (SQLException sqle) {
+         System.out.println("ERROR IN METHOD facultyDeleteWork()");
+         System.out.println("ERROR MESSAGE -> "+sqle);
+      }
+   }
 
 }//end class
