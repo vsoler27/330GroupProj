@@ -20,8 +20,6 @@ public class DataLayer {
       student search 
          works
          interests
-      register
-      validate login/ check user
       create directions.txt
       main method and testing
    */
