@@ -24,7 +24,7 @@ CREATE TABLE contact (
 
 DROP TABLE IF EXISTS interests;
 CREATE TABLE interests (
-	interestId INT AUTO_INCREMENT, -- PK,
+	interestId INT AUTO_INCREMENT, -- PK
 	interests TEXT,
 	PRIMARY KEY (interestId)
 );
@@ -39,7 +39,7 @@ CONSTRAINT user_interestsInterestId FOREIGN KEY (interestId) REFERENCES interest
 
 DROP TABLE IF EXISTS works;
 CREATE TABLE works (
-	worksId INT AUTO_INCREMENT, -- PK,
+	worksId INT AUTO_INCREMENT, -- PK
 	userId INT, -- FK
 	Abstract TEXT,
 	Date DATE,
