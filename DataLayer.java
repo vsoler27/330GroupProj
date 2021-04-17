@@ -5,9 +5,22 @@
  */
 import java.sql.*;
 import javax.swing.*;
+import java.util.Scanner;
 
 public class DataLayer {
    /* Methods needed:
+      public view 
+         works
+         interests
+      public search
+         works
+         interests
+      student view 
+         works
+         interests
+      student search 
+         works
+         interests
       create directions.txt
       main method and testing
    */
@@ -25,9 +38,9 @@ public class DataLayer {
       String password = "student";
       String url = "jdbc:mysql://localhost/project";
       url = url + "?serverTimezone=UTC";
-
-	   String passwordInput = JOptionPane.showInputDialog(null,"Enter password: ",
-	                     "Question", JOptionPane.QUESTION_MESSAGE);
+   
+      String passwordInput = JOptionPane.showInputDialog(null,"Enter password: ",
+                        "Question", JOptionPane.QUESTION_MESSAGE);
       
       password = passwordInput;
       
@@ -36,18 +49,18 @@ public class DataLayer {
          conn = DriverManager.getConnection(url, userName, password);
       }
       catch(ClassNotFoundException cnfe){
-		 System.out.println("No DB Connection");
+         System.out.println("No DB Connection");
          System.out.println("Class");
          System.out.println("ERROR MESSAGE-> "+cnfe);
          System.exit(0);
       }
       catch(SQLException sqle){
-		 System.out.println("ERROR SQLExcepiton in connect()");
-		 System.out.println("ERROR MESSAGE -> "+sqle);
+         System.out.println("ERROR SQLExcepiton in connect()");
+         System.out.println("ERROR MESSAGE -> "+sqle);
          sqle.printStackTrace();
          System.exit(0);
       }//end of catch
-
+   
       return (conn!=null);
    } //end of connect
    
@@ -64,9 +77,9 @@ public class DataLayer {
          }//end else
       }
       catch(SQLException sqle){
-        System.out.println("ERROR IN METHOD close()");
-        System.out.println("ERROR MESSAGE -> "+sqle);
-        return false;
+         System.out.println("ERROR IN METHOD close()");
+         System.out.println("ERROR MESSAGE -> "+sqle);
+         return false;
       }// end of catch
    }//end of method close
 
@@ -75,16 +88,16 @@ public class DataLayer {
     * @param userID the user adding the interest 
     * @param interest the interest to be added
     */
-   public void facultyInsertInterests (String userID, String interestID) {
+   public void facultyInsertInterests (String userID, String interest) {
       try {
          PreparedStatement stmt = conn.prepareStatement("INSERT INTO user_interests(userID,interestID) VALUES(?,?) ");
          stmt.setString(1, userID);
-         stmt.setString(2, interestID);
+         stmt.setString(2, interest);
          stmt.executeUpdate();
       }//end try
       catch (SQLException sqle) {
          System.out.println("ERROR IN METHOD facultyInsertInterests()");
-        System.out.println("ERROR MESSAGE -> "+sqle);
+         System.out.println("ERROR MESSAGE -> "+sqle);
       }//end catch
    }//end facultyInsertInterests
 
@@ -129,7 +142,7 @@ public class DataLayer {
     * @param userID the user
     * @param desc the abstract to be changed
     */
-    public void facultyUpdateWork (String userID, String desc) {
+   public void facultyUpdateWork (String userID, String desc) {
       try {
          PreparedStatement stmt = conn.prepareStatement("UPDATE user_interest SET abstract=? WHERE userID=?");
          stmt.setString(1, desc);
@@ -164,7 +177,7 @@ public class DataLayer {
     * @param userID user removing the interest
     * @param workID the work to be removed
     */
-    public void facultyDeleteWork (String userID, String workID) {
+   public void facultyDeleteWork (String userID, String workID) {
       try {
          PreparedStatement stmt = conn.prepareStatement("DELETE FROM works WHERE userID = ? AND workID = ?");
          stmt.setString(1, userID);
@@ -173,130 +186,6 @@ public class DataLayer {
       }
       catch (SQLException sqle) {
          System.out.println("ERROR IN METHOD facultyDeleteWork()");
-         System.out.println("ERROR MESSAGE -> "+sqle);
-      }
-   }
-
-   /**
-    * View all works in db
-    */
-   public void studentViewWork(){
-      try {
-         PreparedStatement stmt = conn.prepareStatement("Select userId, WorksId, Abstract from works");
-         stmt.executeUpdate();
-      } catch (SQLException sqle) {
-         System.out.println("ERROR IN METHOD facultyUpdateInterest()");
-         System.out.println("ERROR MESSAGE -> "+sqle);
-      }
-   }
-
-   /**
-    * View all interests in db
-    */
-   public void studentViewInterests(){
-      try {
-         PreparedStatement stmt = conn.prepareStatement("Select userId, interests.interest from user_interests" + 
-                                                            "join interests using (interestId)");
-         stmt.executeUpdate();
-      } catch (SQLException sqle) {
-         System.out.println("ERROR IN METHOD facultyUpdateInterest()");
-         System.out.println("ERROR MESSAGE -> "+sqle);
-      }
-   }
-
-   /**
-    * Searches for a specific work
-    * @param userID userID of the owner of the work
-    * @param workID the work ID
-    */
-   public void studentSearchWork(String UserID, String WorkID){
-      try {
-         PreparedStatement stmt = conn.prepareStatement("Select WorksId, Abstract from works where userId = ? AND worksId = ?");
-         stmt.setString(1, UserID);
-         stmt.setString(2, WorkID);
-         stmt.executeUpdate();
-      } catch (SQLException sqle) {
-         System.out.println("ERROR IN METHOD facultyUpdateInterest()");
-         System.out.println("ERROR MESSAGE -> "+sqle);
-      }
-   }
-
-   /**
-    * Searches for a specific interest
-    * @param userID userID of the owner of the interest
-    * @param workID the interest ID
-    */   
-   public void studentSearchInterests(String UserID, String interestId){
-      try {
-         PreparedStatement stmt = conn.prepareStatement("Select interest from interests join user_interests using (interestId)" + 
-                                                            "where userId = ? AND interestId = ?");
-         stmt.setString(1, UserID);
-         stmt.setString(1, interestId);
-         stmt.executeUpdate();
-      } catch (SQLException sqle) {
-         System.out.println("ERROR IN METHOD facultyUpdateInterest()");
-         System.out.println("ERROR MESSAGE -> "+sqle);
-      }
-   }
-
-   /**
-    * View all works in db
-    */
-   public void pubViewWork(){
-      try {
-         PreparedStatement stmt = conn.prepareStatement("Select userId, WorksId, Abstract from works");
-         stmt.executeUpdate();
-      } catch (SQLException sqle) {
-         System.out.println("ERROR IN METHOD facultyUpdateInterest()");
-         System.out.println("ERROR MESSAGE -> "+sqle);
-      }
-   }
-
-   /**
-    * View all interests in db
-    */
-   public void pubViewInterests(){
-      try {
-         PreparedStatement stmt = conn.prepareStatement("Select userId, interests.interest from user_interests" + 
-                                                            "join interests using (interestId)");
-         stmt.executeUpdate();
-      } catch (SQLException sqle) {
-         System.out.println("ERROR IN METHOD facultyUpdateInterest()");
-         System.out.println("ERROR MESSAGE -> "+sqle);
-      }
-   }
-
-   /**
-    * Searches for a specific work
-    * @param userID userID of the owner of the interest
-    * @param workID the interest ID
-    */   
-   public void pubSearchWork(String UserID, String WorkID){
-      try {
-         PreparedStatement stmt = conn.prepareStatement("Select WorksId, Abstract from works where userId = ? AND worksId = ?");
-         stmt.setString(1, UserID);
-         stmt.setString(2, WorkID);
-         stmt.executeUpdate();
-      } catch (SQLException sqle) {
-         System.out.println("ERROR IN METHOD facultyUpdateInterest()");
-         System.out.println("ERROR MESSAGE -> "+sqle);
-      }
-   }
-
-   /**
-    * Searches for a specific interest
-    * @param userID userID of the owner of the work
-    * @param workID the work ID
-    */
-   public void pubSearchInterests(String UserID, String interestId){
-      try {
-         PreparedStatement stmt = conn.prepareStatement("Select interest from interests join user_interests using (interestId)" + 
-                                                            "where userId = ? AND interestId = ?");
-         stmt.setString(1, UserID);
-         stmt.setString(1, interestId);
-         stmt.executeUpdate();
-      } catch (SQLException sqle) {
-         System.out.println("ERROR IN METHOD facultyUpdateInterest()");
          System.out.println("ERROR MESSAGE -> "+sqle);
       }
    }
@@ -397,17 +286,17 @@ public class DataLayer {
          sql += "' AND Password = '" + password + "';";
          rs = stmt.executeQuery(sql); 
          if (rs.next()){ 
-           System.out.println("Successfuly login");
-           String role = rs.getString(2);
-           if (role.equals("s")|| role.equals("S")){
+            System.out.println("Successfuly login");
+            String role = rs.getString(2);
+            if (role.equals("s")|| role.equals("S")){
                System.out.println("The role is Student");
-           }
-           else if (role.equals("f") || role.equals("F")){
+            }
+            else if (role.equals("f") || role.equals("F")){
                System.out.println("The role is Faculty");
-           }
-           else if (role.equals("p") || role.equals("P")){
+            }
+            else if (role.equals("p") || role.equals("P")){
                System.out.println("The role is public");
-           }                 
+            }                 
          }
          else{
             System.out.println("username or password are incorrect");
@@ -428,14 +317,83 @@ public class DataLayer {
 
    public static void main(String[] args) {
       DataLayer db = new DataLayer();
+      Scanner scan = new Scanner(System.in);
       if (db.connect()){
          System.out.println("Database Connect!!!");
          db.login("person@gmail.com","password");
          
-      }// if connect 
-
-           
-      
+         System.out.println("Enter an option:");
+         System.out.println("1. facultyInsertInterests");
+         System.out.println("2. facultyInsertWork");
+         System.out.println("3. facultyUpdateInterests");
+         System.out.println("4. facultyUpdateWork");
+         System.out.println("5. facultyDeleteInterest");
+         System.out.println("6. facultyDeleteWork");
+         System.out.println("7. register");
+         int choice;
+         choice = scan.nextInt();
+         scan.nextLine();
+         if (choice == 1) {
+            System.out.println("Enter the user ID: ");
+            String id = scan.nextLine();
+            System.out.println("Enter the interest: ");
+            String interest = scan.nextLine();
+            db.facultyInsertInterests(id, interest);
+         }
+         else if (choice == 2) {
+            System.out.println("Enter the user ID: ");
+            String id = scan.nextLine();
+            System.out.println("Enter the desc: ");
+            String desc = scan.nextLine();
+            System.out.println("Enter the date: ");
+            String date = scan.nextLine();
+            db.facultyInsertWork(id, desc, date);
+         }
+         else if (choice == 3) {
+            System.out.println("Enter the user id: ");
+            String id = scan.nextLine();
+            System.out.println("Enter the interest: ");
+            String interest = scan.nextLine();
+            db.facultyUpdateInterests(id, interest);
+         }
+         else if (choice == 4) {
+            System.out.println("Enter the user id: ");
+            String id = scan.nextLine();
+            System.out.println("Enter the desc: ");
+            String desc = scan.nextLine();
+            db.facultyUpdateWork(id, desc);
+         }
+         else if (choice == 5) {
+            System.out.println("Enter the user id: ");
+            String id = scan.nextLine();
+            System.out.println("Enter the interest id: ");
+            String int_id = scan.nextLine();
+            db.facultyDeleteInterest(id, int_id);
+         }
+         
+         else if (choice == 6) {
+            System.out.println("Enter the user id: ");
+            String id = scan.nextLine();
+            System.out.println("Enter the work id: ");
+            String work_id = scan.nextLine();
+            db.facultyDeleteWork(id, work_id);
+         }
+         else if (choice == 7) {
+            System.out.println("Enter the username: ");
+            String username = scan.nextLine();
+            System.out.println("Enter the password: ");
+            String password = scan.nextLine();
+            System.out.println("Enter the first name: ");
+            String fname = scan.nextLine();
+            System.out.println("Enter the last name: ");
+            String lname = scan.nextLine();
+            System.out.println("Enter the role: ");
+            String role = scan.nextLine();
+            System.out.println("Enter the phone number: ");
+            String phone = scan.nextLine();
+            int result = db.register(username, password, fname, lname, role, phone);
+            System.out.println(result);
+         } 
+      }//end of if
    }//end of main method
-
-}//end class
+}//end of class
