@@ -188,6 +188,130 @@ public class DataLayer {
          System.out.println("ERROR MESSAGE -> "+sqle);
       }
    }
+
+   /**
+    * View all works in db
+    */
+   public void studentViewWork(){
+      try {
+         PreparedStatement stmt = conn.prepareStatement("Select userId, WorksId, Abstract from works");
+         stmt.executeUpdate();
+      } catch (SQLException sqle) {
+         System.out.println("ERROR IN METHOD facultyUpdateInterest()");
+         System.out.println("ERROR MESSAGE -> "+sqle);
+      }
+   }
+
+   /**
+    * View all interests in db
+    */
+   public void studentViewInterests(){
+      try {
+         PreparedStatement stmt = conn.prepareStatement("Select userId, interests.interest from user_interests" + 
+                                                            "join interests using (interestId)");
+         stmt.executeUpdate();
+      } catch (SQLException sqle) {
+         System.out.println("ERROR IN METHOD facultyUpdateInterest()");
+         System.out.println("ERROR MESSAGE -> "+sqle);
+      }
+   }
+
+   /**
+    * Searches for a specific work
+    * @param userID userID of the owner of the work
+    * @param workID the work ID
+    */
+   public void studentSearchWork(String UserID, String WorkID){
+      try {
+         PreparedStatement stmt = conn.prepareStatement("Select WorksId, Abstract from works where userId = ? AND worksId = ?");
+         stmt.setString(1, UserID);
+         stmt.setString(2, WorkID);
+         stmt.executeUpdate();
+      } catch (SQLException sqle) {
+         System.out.println("ERROR IN METHOD facultyUpdateInterest()");
+         System.out.println("ERROR MESSAGE -> "+sqle);
+      }
+   }
+
+   /**
+    * Searches for a specific interest
+    * @param userID userID of the owner of the interest
+    * @param workID the interest ID
+    */   
+   public void studentSearchInterests(String UserID, String interestId){
+      try {
+         PreparedStatement stmt = conn.prepareStatement("Select interest from interests join user_interests using (interestId)" + 
+                                                            "where userId = ? AND interestId = ?");
+         stmt.setString(1, UserID);
+         stmt.setString(1, interestId);
+         stmt.executeUpdate();
+      } catch (SQLException sqle) {
+         System.out.println("ERROR IN METHOD facultyUpdateInterest()");
+         System.out.println("ERROR MESSAGE -> "+sqle);
+      }
+   }
+
+   /**
+    * View all works in db
+    */
+   public void pubViewWork(){
+      try {
+         PreparedStatement stmt = conn.prepareStatement("Select userId, WorksId, Abstract from works");
+         stmt.executeUpdate();
+      } catch (SQLException sqle) {
+         System.out.println("ERROR IN METHOD facultyUpdateInterest()");
+         System.out.println("ERROR MESSAGE -> "+sqle);
+      }
+   }
+
+   /**
+    * View all interests in db
+    */
+   public void pubViewInterests(){
+      try {
+         PreparedStatement stmt = conn.prepareStatement("Select userId, interests.interest from user_interests" + 
+                                                            "join interests using (interestId)");
+         stmt.executeUpdate();
+      } catch (SQLException sqle) {
+         System.out.println("ERROR IN METHOD facultyUpdateInterest()");
+         System.out.println("ERROR MESSAGE -> "+sqle);
+      }
+   }
+
+   /**
+    * Searches for a specific work
+    * @param userID userID of the owner of the interest
+    * @param workID the interest ID
+    */   
+   public void pubSearchWork(String UserID, String WorkID){
+      try {
+         PreparedStatement stmt = conn.prepareStatement("Select WorksId, Abstract from works where userId = ? AND worksId = ?");
+         stmt.setString(1, UserID);
+         stmt.setString(2, WorkID);
+         stmt.executeUpdate();
+      } catch (SQLException sqle) {
+         System.out.println("ERROR IN METHOD facultyUpdateInterest()");
+         System.out.println("ERROR MESSAGE -> "+sqle);
+      }
+   }
+
+   /**
+    * Searches for a specific interest
+    * @param userID userID of the owner of the work
+    * @param workID the work ID
+    */
+   public void pubSearchInterests(String UserID, String interestId){
+      try {
+         PreparedStatement stmt = conn.prepareStatement("Select interest from interests join user_interests using (interestId)" + 
+                                                            "where userId = ? AND interestId = ?");
+         stmt.setString(1, UserID);
+         stmt.setString(1, interestId);
+         stmt.executeUpdate();
+      } catch (SQLException sqle) {
+         System.out.println("ERROR IN METHOD facultyUpdateInterest()");
+         System.out.println("ERROR MESSAGE -> "+sqle);
+      }
+   }
 	
 /**
     * Register the user account and insert it to the database
