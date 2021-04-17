@@ -75,11 +75,11 @@ public class DataLayer {
     * @param userID the user adding the interest 
     * @param interest the interest to be added
     */
-   public void facultyInsertInterests (String userID, String interest) {
+   public void facultyInsertInterests (String userID, String interestID) {
       try {
-         PreparedStatement stmt = conn.prepareStatement("INSERT INTO user_interests(userID,interest) VALUES(?,?) ");
+         PreparedStatement stmt = conn.prepareStatement("INSERT INTO user_interests(userID,interestID) VALUES(?,?) ");
          stmt.setString(1, userID);
-         stmt.setString(2, interest);
+         stmt.setString(2, interestID);
          stmt.executeUpdate();
       }//end try
       catch (SQLException sqle) {
