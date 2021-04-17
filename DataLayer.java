@@ -8,18 +8,6 @@ import javax.swing.*;
 
 public class DataLayer {
    /* Methods needed:
-      public view 
-         works
-         interests
-      public search
-         works
-         interests
-      student view 
-         works
-         interests
-      student search 
-         works
-         interests
       create directions.txt
       main method and testing
    */
