@@ -1,0 +1,1 @@
+Main method is in the data layer program (for now). In the future it will be in the presentation layer. 
