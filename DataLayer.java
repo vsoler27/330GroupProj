@@ -142,10 +142,27 @@ public class DataLayer {
     * @param userID the user
     * @param desc the abstract to be changed
     */
-   public void facultyUpdateWork (String userID, String desc) {
+   public void facultyUpdateAbstract (String userID, String desc) {
       try {
-         PreparedStatement stmt = conn.prepareStatement("UPDATE user_interest SET abstract=? WHERE userID=?");
+         PreparedStatement stmt = conn.prepareStatement("UPDATE works SET abstract=? WHERE userID=?");
          stmt.setString(1, desc);
+         stmt.setString(2, userID);
+         stmt.executeUpdate();
+      } catch (SQLException sqle) {
+         System.out.println("ERROR IN METHOD facultyUpdateWork()");
+         System.out.println("ERROR MESSAGE -> "+sqle);
+      }
+   }
+
+    /**
+    * Updates a the date of a work
+    * @param userID the user
+    * @param date the date to be changed
+    */
+    public void facultyUpdateWorkDate(String userID, String date) {
+      try {
+         PreparedStatement stmt = conn.prepareStatement("UPDATE works SET date=? WHERE userID=?");
+         stmt.setString(1, date);
          stmt.setString(2, userID);
          stmt.executeUpdate();
       } catch (SQLException sqle) {
@@ -361,7 +378,7 @@ public class DataLayer {
             String id = scan.nextLine();
             System.out.println("Enter the desc: ");
             String desc = scan.nextLine();
-            db.facultyUpdateWork(id, desc);
+            db.facultyUpdateAbstract(id, desc);
          }
          else if (choice == 5) {
             System.out.println("Enter the user id: ");
