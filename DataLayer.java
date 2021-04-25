@@ -149,7 +149,7 @@ public class DataLayer {
          stmt.setString(2, userID);
          stmt.executeUpdate();
       } catch (SQLException sqle) {
-         System.out.println("ERROR IN METHOD facultyUpdateWork()");
+         System.out.println("ERROR IN METHOD facultyUpdateAbstract()");
          System.out.println("ERROR MESSAGE -> "+sqle);
       }
    }
@@ -166,7 +166,7 @@ public class DataLayer {
          stmt.setString(2, userID);
          stmt.executeUpdate();
       } catch (SQLException sqle) {
-         System.out.println("ERROR IN METHOD facultyUpdateWork()");
+         System.out.println("ERROR IN METHOD facultyUpdateWorkDate()");
          System.out.println("ERROR MESSAGE -> "+sqle);
       }
    }
@@ -206,7 +206,99 @@ public class DataLayer {
          System.out.println("ERROR MESSAGE -> "+sqle);
       }
    }
-	
+
+   /**
+    * Search the interests of a user
+    * @param userId the user being searched
+    * @return a String of all of their interests
+    */
+   public String searchUserInterest(String userId) {
+      String ans = "Inserts of User " + userId + ": ";
+      try {
+         PreparedStatement stmt = conn.prepareStatement("SELECT interestId FROM user_interests WHERE userId = ?");
+         stmt.setString(1, userId);
+         rs = stmt.executeQuery();
+         while (rs.next()) {
+            ans += rs.getString(1) + "\n";
+         }
+
+      }
+      catch (SQLException sqle) {
+         System.out.println("ERROR IN METHOD searchUserInterest()");
+         System.out.println("ERROR MESSAGE -> "+sqle);
+      }
+      return ans;
+   }
+   
+   /**
+    * Search by interests
+    * @param interestId the interst being searched for
+    * @return a string of the users 
+    */
+   public String searchInterests(String interestId) {
+      String ans = "Users with interest " + interestId + ": ";
+      try {
+         PreparedStatement stmt = conn.prepareStatement("SELECT userId FROM user_interests WHERE interestId = ?");
+         stmt.setString(1, interestId);
+         rs = stmt.executeQuery();
+         while (rs.next()) {
+            ans += rs.getString(1) + "\n";
+         }
+
+      }
+      catch (SQLException sqle) {
+         System.out.println("ERROR IN METHOD searchInterests()");
+         System.out.println("ERROR MESSAGE -> "+sqle);
+      }
+      return ans;
+   }
+
+   /**
+    * Search the works of a user
+    * @param userId the user being searched
+    * @return a String of all of their works
+    */
+    public String searchUserWork(String userId) {
+      String ans = "Works of User " + userId + ": ";
+      try {
+         PreparedStatement stmt = conn.prepareStatement("SELECT workId FROM works WHERE userId = ?");
+         stmt.setString(1, userId);
+         rs = stmt.executeQuery();
+         while (rs.next()) {
+            ans += rs.getString(1) + "\n";
+         }
+
+      }
+      catch (SQLException sqle) {
+         System.out.println("ERROR IN METHOD searchUserWork()");
+         System.out.println("ERROR MESSAGE -> "+sqle);
+      }
+      return ans;
+   }
+   
+   /**
+    * Search by work
+    * @param interestId the interst being searched for
+    * @return a string of the users 
+    */
+   public String searchWorks(String workId) {
+      String ans = "Users with work " + workId + ": ";
+      try {
+         PreparedStatement stmt = conn.prepareStatement("SELECT userId FROM works WHERE workId = ?");
+         stmt.setString(1, workId);
+         rs = stmt.executeQuery();
+         while (rs.next()) {
+            ans += rs.getString(1) + "\n";
+         }
+
+      }
+      catch (SQLException sqle) {
+         System.out.println("ERROR IN METHOD searchWorks()");
+         System.out.println("ERROR MESSAGE -> "+sqle);
+      }
+      return ans;
+   }
+
 /**
     * Register the user account and insert it to the database
     * @param username the account username 
