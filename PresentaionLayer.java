@@ -16,27 +16,73 @@ public class PresentaionLayer extends JFrame {
    
    public void RegisterGUI(){
    
-      JPanel Inputbox = new JPanel(new GridLayout(0,2));
+      JPanel Inputbox = new JPanel(new GridLayout(6,2));
       JLabel lblUser     = new JLabel("Username :");
 		JLabel lblPassword = new JLabel("Password :");
       JTextField tfUser     = new JTextField("");
-      JTextField tfPassword = new JPasswordField("");
+      JTextField tfPassword = new JTextField("");
+      
       JLabel lblFname     = new JLabel("First Name :");
 		JLabel lblLname = new JLabel("Last Name :");      
       JTextField tfFname    = new JTextField("");
-      JTextField tfLname = new JPasswordField("");
-      Inputbox.add(jbReg);
+      JTextField tfLname = new  JTextField("");
+      
+      JLabel lblrole = new JLabel("Role :");  
+      // Radio buttons of the flavor of bubble tea     
+      JPanel jprole = new JPanel( new GridLayout(0,1) );  
+      JRadioButton jrbStudent    = new JRadioButton("Student", true);
+      jrbStudent.setActionCommand("s");
+      JRadioButton jrbFaculty  = new JRadioButton("Faculty" );
+      jrbFaculty.setActionCommand("f");
+      JRadioButton jrbPublic = new JRadioButton("Public" );
+      jrbPublic.setActionCommand("p");
+      
+      ButtonGroup bgrole = new ButtonGroup();
+      bgrole.add( jrbStudent);
+      bgrole.add( jrbFaculty);
+      bgrole.add( jrbPublic);
+
+         
+      jprole.add( jrbStudent);
+      jprole.add( jrbFaculty );
+      jprole.add( jrbPublic );
+      
+     
+
+      
+
+		JLabel lblPhone = new JLabel("PhoneNumber:");      
+      JTextField tfPhone    = new JTextField("");
+      
+ 
       Inputbox.add(lblUser);
 		Inputbox.add(tfUser);
 		Inputbox.add(lblPassword);
       Inputbox.add(tfPassword);
+      Inputbox.add(lblFname);
+		Inputbox.add(tfFname);
+		Inputbox.add(lblLname);
+      Inputbox.add(tfLname);
+      
+      Inputbox.add(lblrole);
+      Inputbox.add(jprole);
+      
+      Inputbox.add(lblPhone);
+      Inputbox.add(tfPhone);
       JOptionPane.showMessageDialog(null, Inputbox,
-		      		   "login", JOptionPane.INFORMATION_MESSAGE);
+		      		   "Register", JOptionPane.INFORMATION_MESSAGE);
 
-
-         String userName = tfUser.getText();
+   
+         String username = tfUser.getText();
          String password = tfPassword.getText();
+         String fName = tfFname.getText();
+         String lName = tfLname.getText();
+         
+         String role =  bgrole.getSelection().getActionCommand();
+         String phoneNumber = tfPhone.getText();
+         
          db.register(username,password,fName,lName,role,phoneNumber) ;
+         
    
    }
 
@@ -79,7 +125,7 @@ public class PresentaionLayer extends JFrame {
          JButton jbLog = new JButton("Login");
          jbReg.addActionListener(new ActionListener() { 
          public void actionPerformed(ActionEvent e) { 
-            System.out.println("dsfdfsdds");
+            RegisterGUI();
          } });
          jbLog.addActionListener(new ActionListener() { 
          public void actionPerformed(ActionEvent e) { 
