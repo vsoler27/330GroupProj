@@ -29,6 +29,7 @@ public class DataLayer {
    private ResultSetMetaData rsmd;
    private Statement stmt;
    private String sql;
+   private String userId;
    
    final String DEFAULT_DRIVER = "com.mysql.cj.jdbc.Driver";
    
