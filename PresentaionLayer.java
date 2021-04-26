@@ -13,10 +13,13 @@ import java.awt.event.*;
 public class PresentaionLayer extends JFrame {
    DataLayer db = new DataLayer();
    Scanner scan = new Scanner(System.in);
+   JFrame loginFrame = new JFrame();
    
-   public void RegisterGUI(){
+   int userRole;
    
-      JPanel Inputbox = new JPanel(new GridLayout(6,2));
+   public void registerGUI(){
+   
+      JPanel Inputbox = new JPanel(new GridLayout(8,1));
       JLabel lblUser     = new JLabel("Username :");
 		JLabel lblPassword = new JLabel("Password :");
       JTextField tfUser     = new JTextField("");
@@ -29,7 +32,7 @@ public class PresentaionLayer extends JFrame {
       
       JLabel lblrole = new JLabel("Role :");  
       // Radio buttons of the flavor of bubble tea     
-      JPanel jprole = new JPanel( new GridLayout(0,1) );  
+      JPanel jprole = new JPanel();  
       JRadioButton jrbStudent    = new JRadioButton("Student", true);
       jrbStudent.setActionCommand("s");
       JRadioButton jrbFaculty  = new JRadioButton("Faculty" );
@@ -48,9 +51,6 @@ public class PresentaionLayer extends JFrame {
       jprole.add( jrbPublic );
       
      
-
-      
-
 		JLabel lblPhone = new JLabel("PhoneNumber:");      
       JTextField tfPhone    = new JTextField("");
       
@@ -85,10 +85,11 @@ public class PresentaionLayer extends JFrame {
          
    
    }
-
-   public PresentaionLayer()  {
-      if (db.connect()){
-         //add the title in the screen 
+   
+    public void loginGUI(){
+      
+      
+      //add the title in the screen 
          JPanel jpTitle = new JPanel();
       
          JLabel title1 = new JLabel("Login");
@@ -96,7 +97,7 @@ public class PresentaionLayer extends JFrame {
          title1.setFont( fontTitle ); 
          jpTitle.add( title1 );
          
-         add( jpTitle, BorderLayout.NORTH );
+         loginFrame.add( jpTitle, BorderLayout.NORTH );
       
       
          JPanel jpLogin = new JPanel(new GridLayout(0,1));
@@ -114,7 +115,7 @@ public class PresentaionLayer extends JFrame {
 		   jpLogin.add(lblPassword );
          jpLogin.add(tfPassword );
          
-         add( jpLogin, BorderLayout.CENTER);
+         loginFrame.add( jpLogin, BorderLayout.CENTER);
          
     
          
@@ -125,20 +126,20 @@ public class PresentaionLayer extends JFrame {
          JButton jbLog = new JButton("Login");
          jbReg.addActionListener(new ActionListener() { 
          public void actionPerformed(ActionEvent e) { 
-            RegisterGUI();
+            registerGUI();
          } });
          jbLog.addActionListener(new ActionListener() { 
          public void actionPerformed(ActionEvent e) { 
             String userName = tfUser.getText();
             String password = tfPassword.getText();
-            db.login(userName,password);
+            userRole = db.login(userName,password);
          } });
          
          jpButton.add(jbReg );
          jpButton.add(jbLog );
           
           
-         add( jpButton, BorderLayout.SOUTH);
+         loginFrame.add( jpButton, BorderLayout.SOUTH);
          
 		   
 
@@ -152,14 +153,37 @@ public class PresentaionLayer extends JFrame {
          }); 
       
       // GUI display controls 
-      setDefaultCloseOperation( EXIT_ON_CLOSE );
-      pack();
-      setLocationRelativeTo( null );
-      setSize( (int)(getWidth()*1.10), getHeight() ); 
-      setVisible( true );
-     
+      loginFrame.setDefaultCloseOperation( EXIT_ON_CLOSE );
+      loginFrame.pack();
+      loginFrame.setLocationRelativeTo( null );
+      loginFrame.setSize( 300, 200 ); 
+      loginFrame.setVisible( true );
+      
 
- 
+         
+   
+   }
+
+   public PresentaionLayer()  {
+      if (db.connect()){
+         loginGUI();
+         if (userRole == 1){
+         // if role is faculty
+         
+         }
+         else if (userRole == 2){
+         
+         // if role is student
+         }
+         
+         else if (userRole == 3){
+         
+         // if role is public
+         }
+         else{
+         
+         }
+          
       }//end of if
       
       else{
