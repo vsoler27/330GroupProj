@@ -40,7 +40,7 @@ public class DataLayer {
       url = url + "?serverTimezone=UTC";
    
       String passwordInput = JOptionPane.showInputDialog(null,"Enter password: ",
-                        "Question", JOptionPane.QUESTION_MESSAGE);
+                        "Connect to Database", JOptionPane.QUESTION_MESSAGE);
       
       password = passwordInput;
       
@@ -386,8 +386,12 @@ public class DataLayer {
     * Validate the user login and check to see their role
     * @param username the account username 
     * @param password the account password
+    * @return 1 if role is faculty
+    * @return 2 if role is student
+    * @return 3 if role is public
+    * @return 0 if account didn't exit;
     */
-   public void login(String username, String password) {
+   public int login(String username, String password) {
    
       try {
          stmt = conn.createStatement();
@@ -397,18 +401,23 @@ public class DataLayer {
          if (rs.next()){ 
             System.out.println("Successfuly login");
             String role = rs.getString(2);
+            userId = rs.getString(1);
             if (role.equals("s")|| role.equals("S")){
                System.out.println("The role is Student");
+               return 2;
             }
             else if (role.equals("f") || role.equals("F")){
                System.out.println("The role is Faculty");
+               return 1;
             }
             else if (role.equals("p") || role.equals("P")){
                System.out.println("The role is public");
+               return 3;
             }                 
          }
          else{
             System.out.println("username or password are incorrect");
+            return 0;
          }
             
       }// end of try
@@ -418,91 +427,8 @@ public class DataLayer {
          System.out.println("Error message is --> "+e);
       }//end of catch
       
-   
+      return 0;
       
    }// end of method login
 
-   
-
-   public static void main(String[] args) {
-      DataLayer db = new DataLayer();
-      Scanner scan = new Scanner(System.in);
-      if (db.connect()){
-         System.out.println("Database Connect!!!");
-         db.login("person@gmail.com","password");
-         
-         System.out.println("Enter an option:");
-         System.out.println("1. facultyInsertInterests");
-         System.out.println("2. facultyInsertWork");
-         System.out.println("3. facultyUpdateInterests");
-         System.out.println("4. facultyUpdateWork");
-         System.out.println("5. facultyDeleteInterest");
-         System.out.println("6. facultyDeleteWork");
-         System.out.println("7. register");
-         int choice;
-         choice = scan.nextInt();
-         scan.nextLine();
-         if (choice == 1) {
-            System.out.println("Enter the user ID: ");
-            String id = scan.nextLine();
-            System.out.println("Enter the interest: ");
-            String interest = scan.nextLine();
-            db.facultyInsertInterests(id, interest);
-         }
-         else if (choice == 2) {
-            System.out.println("Enter the user ID: ");
-            String id = scan.nextLine();
-            System.out.println("Enter the desc: ");
-            String desc = scan.nextLine();
-            System.out.println("Enter the date: ");
-            String date = scan.nextLine();
-            db.facultyInsertWork(id, desc, date);
-         }
-         else if (choice == 3) {
-            System.out.println("Enter the user id: ");
-            String id = scan.nextLine();
-            System.out.println("Enter the interest: ");
-            String interest = scan.nextLine();
-            db.facultyUpdateInterests(id, interest);
-         }
-         else if (choice == 4) {
-            System.out.println("Enter the user id: ");
-            String id = scan.nextLine();
-            System.out.println("Enter the desc: ");
-            String desc = scan.nextLine();
-            db.facultyUpdateAbstract(id, desc);
-         }
-         else if (choice == 5) {
-            System.out.println("Enter the user id: ");
-            String id = scan.nextLine();
-            System.out.println("Enter the interest id: ");
-            String int_id = scan.nextLine();
-            db.facultyDeleteInterest(id, int_id);
-         }
-         
-         else if (choice == 6) {
-            System.out.println("Enter the user id: ");
-            String id = scan.nextLine();
-            System.out.println("Enter the work id: ");
-            String work_id = scan.nextLine();
-            db.facultyDeleteWork(id, work_id);
-         }
-         else if (choice == 7) {
-            System.out.println("Enter the username: ");
-            String username = scan.nextLine();
-            System.out.println("Enter the password: ");
-            String password = scan.nextLine();
-            System.out.println("Enter the first name: ");
-            String fname = scan.nextLine();
-            System.out.println("Enter the last name: ");
-            String lname = scan.nextLine();
-            System.out.println("Enter the role: ");
-            String role = scan.nextLine();
-            System.out.println("Enter the phone number: ");
-            String phone = scan.nextLine();
-            int result = db.register(username, password, fname, lname, role, phone);
-            System.out.println(result);
-         } 
-      }//end of if
-   }//end of main method
 }//end of class
