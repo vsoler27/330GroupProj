@@ -16,26 +16,106 @@ public class PresentaionLayer extends JFrame {
    JFrame loginFrame = new JFrame();
    
    int userRole;
+   String userId;
    
    public PresentaionLayer()  {
       if (db.connect()){
-         loginGUI();
-         if (userRole == 1){
-         // if role is faculty
+      
+         //add the title in the screen 
+         JPanel jpTitle = new JPanel();
+      
+         JLabel title1 = new JLabel("Login");
+         Font fontTitle = new Font("Arial", Font.BOLD, 20 );
+         title1.setFont( fontTitle ); 
+         jpTitle.add( title1 );
          
-         }
-         else if (userRole == 2){
+         loginFrame.add( jpTitle, BorderLayout.NORTH );
+      
+      
+         JPanel jpLogin = new JPanel(new GridLayout(0,1));
+         JLabel lblUser     = new JLabel("Username :");
+         JLabel lblPassword = new JLabel("Password :");
+         JTextField tfUser     = new JTextField("");
+         JTextField tfPassword = new JPasswordField("");
          
-         // if role is student
-         }
          
-         else if (userRole == 3){
+         tfUser.setForeground(Color.BLUE);
+         tfPassword.setForeground(Color.BLUE);
+      
+         jpLogin.add(lblUser);
+         jpLogin.add(tfUser );
+         jpLogin.add(lblPassword );
+         jpLogin.add(tfPassword );
          
-         // if role is public
-         }
-         else{
+         loginFrame.add( jpLogin, BorderLayout.CENTER);
          
-         }
+      
+         
+         
+         
+         JPanel jpButton = new JPanel();
+         JButton jbReg = new JButton("Register");
+         JButton jbLog = new JButton("Login");
+         jbReg.addActionListener(
+            new ActionListener() { 
+               public void actionPerformed(ActionEvent e) { 
+                  registerGUI();
+               } });
+         jbLog.addActionListener(
+            new ActionListener() { 
+               public void actionPerformed(ActionEvent e) { 
+                  String userName = tfUser.getText();
+                  String password = tfPassword.getText();
+                  userRole = db.login(userName,password);
+                  userId = db.getUserId();
+                  JOptionPane.showMessageDialog(null, "you are login!");
+               
+               
+                  System.out.println(userId);
+                  if (userRole == 1){
+                  // if role is faculty
+                     System.out.println("ddd:");
+                  }
+                  else if (userRole == 2){
+                  
+                  // if role is student
+                  }
+                  
+                  else if (userRole == 3){
+                  
+                  // if role is public
+                  }
+                  else{
+                  
+                  }
+               
+               } });
+         
+         jpButton.add(jbReg );
+         jpButton.add(jbLog );
+          
+          
+         loginFrame.add( jpButton, BorderLayout.SOUTH);
+         
+         
+      
+      
+         //kill gui
+         addWindowListener(
+            new WindowAdapter(){
+               public void windowClosing(WindowEvent we){
+                  JOptionPane.showMessageDialog(null, "Thank you, have good day!");
+               }
+            }); 
+      
+      // GUI display controls 
+         loginFrame.setDefaultCloseOperation( EXIT_ON_CLOSE );
+         loginFrame.pack();
+         loginFrame.setLocationRelativeTo( null );
+         loginFrame.setSize( 300, 200 ); 
+         loginFrame.setVisible( true );
+      
+      
           
       }//end of if
       
@@ -125,89 +205,6 @@ public class PresentaionLayer extends JFrame {
       }
          
    }//register GUI
-   
-   
-   /**
-    * This function will display the GUI for user to login
-    */
-   
-   public void loginGUI(){
-      
-      
-      //add the title in the screen 
-      JPanel jpTitle = new JPanel();
-      
-      JLabel title1 = new JLabel("Login");
-      Font fontTitle = new Font("Arial", Font.BOLD, 20 );
-      title1.setFont( fontTitle ); 
-      jpTitle.add( title1 );
-         
-      loginFrame.add( jpTitle, BorderLayout.NORTH );
-      
-      
-      JPanel jpLogin = new JPanel(new GridLayout(0,1));
-      JLabel lblUser     = new JLabel("Username :");
-      JLabel lblPassword = new JLabel("Password :");
-      JTextField tfUser     = new JTextField("");
-      JTextField tfPassword = new JPasswordField("");
-         
-         
-      tfUser.setForeground(Color.BLUE);
-      tfPassword.setForeground(Color.BLUE);
-   
-      jpLogin.add(lblUser);
-      jpLogin.add(tfUser );
-      jpLogin.add(lblPassword );
-      jpLogin.add(tfPassword );
-         
-      loginFrame.add( jpLogin, BorderLayout.CENTER);
-         
-    
-         
-         
-         
-      JPanel jpButton = new JPanel();
-      JButton jbReg = new JButton("Register");
-      JButton jbLog = new JButton("Login");
-      jbReg.addActionListener(
-         new ActionListener() { 
-            public void actionPerformed(ActionEvent e) { 
-               registerGUI();
-            } });
-      jbLog.addActionListener(
-         new ActionListener() { 
-            public void actionPerformed(ActionEvent e) { 
-               String userName = tfUser.getText();
-               String password = tfPassword.getText();
-               userRole = db.login(userName,password);
-            } });
-         
-      jpButton.add(jbReg );
-      jpButton.add(jbLog );
-          
-          
-      loginFrame.add( jpButton, BorderLayout.SOUTH);
-         
-   	   
-   
-   
-         //kill gui
-      addWindowListener(
-         new WindowAdapter(){
-            public void windowClosing(WindowEvent we){
-               JOptionPane.showMessageDialog(null, "Thank you, have good day!");
-            }
-         }); 
-      
-      // GUI display controls 
-      loginFrame.setDefaultCloseOperation( EXIT_ON_CLOSE );
-      loginFrame.pack();
-      loginFrame.setLocationRelativeTo( null );
-      loginFrame.setSize( 300, 200 ); 
-      loginFrame.setVisible( true );
-   
-   }//login GUI
 
-   
 
 }//class
