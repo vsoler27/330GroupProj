@@ -335,7 +335,6 @@ public class DataLayer {
                   ResultSet rs1 = stmt1.getGeneratedKeys();
                   rs1.next();
                   int auto_id = rs1.getInt(1);
-                  System.out.println(auto_id);
                
                   try{
                      PreparedStatement stmt2;
@@ -431,5 +430,15 @@ public class DataLayer {
       return 0;
       
    }// end of method login
+   
+   
+   /**
+    * This function will get the userId who current login.
+    * @return userId
+    */
+   public String getUserId() {
+   
+      return userId;
+   }// end of method getUserId
 
 }//end of class
