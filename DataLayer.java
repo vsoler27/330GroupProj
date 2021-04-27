@@ -399,7 +399,6 @@ public class DataLayer {
          sql += "' AND Password = '" + password + "';";
          rs = stmt.executeQuery(sql); 
          if (rs.next()){ 
-            System.out.println("Successfuly login");
             String role = rs.getString(2);
             userId = rs.getString(1);
             if (role.equals("s")|| role.equals("S")){
@@ -416,7 +415,7 @@ public class DataLayer {
             }                 
          }
          else{
-            System.out.println("username or password are incorrect");
+            JOptionPane.showMessageDialog(null, "username or password are incorrect");
             return 0;
          }
             
@@ -440,5 +439,6 @@ public class DataLayer {
    
       return userId;
    }// end of method getUserId
+
 
 }//end of class
