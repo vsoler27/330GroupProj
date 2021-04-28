@@ -436,7 +436,7 @@ public class DataLayer {
     * @return userId
     */
    public String getUserId() {
-   
+      System.out.println("The ID of currently logged in user is: " + userId);
       return userId;
    }// end of method getUserId
 
