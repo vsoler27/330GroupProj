@@ -14,6 +14,7 @@ public class PresentaionLayer extends JFrame {
    DataLayer db = new DataLayer();
    Scanner scan = new Scanner(System.in);
    JFrame loginFrame = new JFrame();
+   JFrame mainFrame = new JFrame();
    
    int userRole;
    String userId;
@@ -49,10 +50,6 @@ public class PresentaionLayer extends JFrame {
          
          loginFrame.add( jpLogin, BorderLayout.CENTER);
          
-      
-         
-         
-         
          JPanel jpButton = new JPanel();
          JButton jbReg = new JButton("Register");
          JButton jbLog = new JButton("Login");
@@ -68,13 +65,33 @@ public class PresentaionLayer extends JFrame {
                   String password = tfPassword.getText();
                   userRole = db.login(userName,password);
                   userId = db.getUserId();
-                  JOptionPane.showMessageDialog(null, "you are login!");
+                  //JOptionPane.showMessageDialog(null, "Login successful!");
                
                
                   System.out.println(userId);
                   if (userRole == 1){
                   // if role is faculty
-                     System.out.println("ddd:");
+                  //trying to create a list of all the possible inputs
+                  //that the various methods require
+                     System.out.println("User accepted");
+                     mainFrame.add( jpTitle, BorderLayout.NORTH );
+                     JPanel jpLogin = new JPanel(new GridLayout(3,0));
+                     JLabel jlbOperation     = new JLabel("Operation: ");
+                     JLabel jlbUserID     = new JLabel("User ID: ");
+                     JLabel jlblInterest     = new JLabel("Interest: ");
+                     JLabel jlbDecription     = new JLabel("Description: ");
+                     JLabel jlbDate     = new JLabel("Date: ");
+                     JLabel jlbInterestID     = new JLabel("Interest ID: ");
+                     JLabel jlbWorkID     = new JLabel("Work ID: ");
+                  
+                     //creating a drop-down menu of possible methods to call/select
+                     //which enables all the correct fields and greys out the remaining                   
+                     String[] choices = { "CHOICE 1", "CHOICE 2", "CHOICE 3" };
+                     JComboBox<String> cb = new JComboBox<String>(choices);
+                     cb.setVisible(true);
+                     loginFrame.add(cb);
+                  
+                     
                   }
                   else if (userRole == 2){
                   
@@ -151,11 +168,11 @@ public class PresentaionLayer extends JFrame {
       // Radio buttons of the flavor of bubble tea     
       JPanel jprole = new JPanel();  
       JRadioButton jrbStudent    = new JRadioButton("Student", true);
-      jrbStudent.setActionCommand("s");
+      jrbStudent.setActionCommand("S");
       JRadioButton jrbFaculty  = new JRadioButton("Faculty" );
-      jrbFaculty.setActionCommand("f");
+      jrbFaculty.setActionCommand("F");
       JRadioButton jrbPublic = new JRadioButton("Public" );
-      jrbPublic.setActionCommand("p");
+      jrbPublic.setActionCommand("P");
       
       ButtonGroup bgrole = new ButtonGroup();
       bgrole.add( jrbStudent);
