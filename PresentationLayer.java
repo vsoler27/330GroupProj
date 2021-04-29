@@ -18,6 +18,15 @@ public class PresentationLayer extends JFrame {
    JFrame loginFrame = new JFrame();
    JFrame mainFrame = new JFrame();
    
+   //buttons declared here
+   JRadioButton insWork ;
+   JRadioButton upInt ;
+   JRadioButton upAbs ;
+   JRadioButton UpWork ;
+   JRadioButton delInt ;
+   JRadioButton DelWork ;
+
+   
    int userRole;
    String userId;
    
@@ -70,7 +79,7 @@ public class PresentationLayer extends JFrame {
                   userId = db.getUserId();
                   JOptionPane.showMessageDialog(null, "Login successful!");
                   // do we need to dismiss the login prompt after login is successful?
-
+               
                   System.out.println(userId);
                   if (userRole == 1){
                   // if role is faculty
@@ -79,12 +88,13 @@ public class PresentationLayer extends JFrame {
                   //that the various methods require
                      System.out.println("User accepted");
                      
-                     mainFrame.add( jpTitle, BorderLayout.NORTH );
-                     JPanel jpFaculty = new JPanel(new GridLayout(3,0));
-                     JLabel jlbOperation     = new JLabel("Operation: ");
-                     JTextField jtfOp = new JTextField
                      
-                     JLabel jlbUserID     = new JLabel("User ID: ");
+                     JPanel jpFaculty = new JPanel(new GridLayout(3,4));
+                     mainFrame.add( jpFaculty, BorderLayout.NORTH );
+                     JLabel jlbOperation     = new JLabel("Operation: ");
+                     JTextField jtfOp = new JTextField("Op");
+                     
+                     JLabel jlbUserID  = new JLabel("User ID: ");
                      JTextField jtfUID = new JTextField("");
                      
                      JLabel jlbInterest     = new JLabel("Interest: ");
@@ -94,7 +104,7 @@ public class PresentationLayer extends JFrame {
                      JTextField jtfDesc = new JTextField("");
                      
                      JLabel jlbDate     = new JLabel("Date: ");
-                     DateFormat format = new SimpleDateFormat("dd/MM/yyy");
+                     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyy");
                      JFormattedTextField jtfDate = new JFormattedTextField(format);
                      
                      JLabel jlbInterestID     = new JLabel("Interest ID: ");
@@ -102,12 +112,37 @@ public class PresentationLayer extends JFrame {
                      
                      JLabel jlbWorkID     = new JLabel("Work ID: ");
                      JTextField jtfWID = new JTextField("");
+                     
+                     //buttons
+                     insWork = new JRadioButton("Insert work");
+                     upInt = new JRadioButton("Update Interests");
+                     upAbs = new JRadioButton("Update Abstract");
+                     UpWork = new JRadioButton("Update Work ");
+                     delInt = new JRadioButton("Delete Interest ");
+                     DelWork = new JRadioButton("Delete Work ");
+                     ButtonGroup group = new ButtonGroup();
+                     group.add(insWork);
+                     group.add(upInt);
+                     group.add(upAbs);
+                     group.add(UpWork);
+                     group.add(delInt);
+
                   
-                     //creating a drop-down menu of possible methods to call/select
-                     //which enables all the correct fields and greys out the remaining                   
+                  
+                     // //creating a drop-down menu of possible methods to call/select
+                  //                      //which enables all the correct fields and greys out the remaining                   
                      String[] choices = { "CHOICE 1", "CHOICE 2", "CHOICE 3" };
                      JComboBox<String> cb = new JComboBox<String>(choices);
                      cb.setVisible(true);
+                     mainFrame.add(cb);
+                     
+                     mainFrame.add(insWork);
+                     mainFrame.add(upInt);
+                     mainFrame.add(upAbs);
+                     mainFrame.add(UpWork);
+                     mainFrame.add(delInt);
+                     mainFrame.add(DelWork);
+                     
                      jpFaculty.add(jlbOperation);
                      jpFaculty.add(jtfOp);
                      
@@ -129,7 +164,15 @@ public class PresentationLayer extends JFrame {
                      jpFaculty.add(jlbWorkID);
                      jpFaculty.add(jtfWID);
                      
-                     mainFrame.add(cb);
+                     
+                     mainFrame.setDefaultCloseOperation( EXIT_ON_CLOSE );
+                     mainFrame.pack();
+                     mainFrame.setLocationRelativeTo( null );
+                     mainFrame.setSize( 500, 300 ); 
+                     mainFrame.setVisible( true );
+                     
+                     
+                     
                      
                   }
                   else if (userRole == 2){
@@ -167,7 +210,7 @@ public class PresentationLayer extends JFrame {
          loginFrame.setSize( 500, 300 ); 
          
          loginFrame.setVisible( true );
-     
+      
       }//end of if
       
       else{
