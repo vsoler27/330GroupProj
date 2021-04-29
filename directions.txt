@@ -1,1 +1,18 @@
-Main method is in the data layer program (for now). In the future it will be in the presentation layer. 
+Group 6
+Steps:
+
+1) Source project.sql and dummy.sql to build database and input dummy data
+2) Login into the database: password = student
+3) Please click register, enter information in all of the fields, and click ok
+4) Login using the information you just inputted
+5) If you registered as a faculty member, you may insert, delete, and/or update. Select radio button
+6) Please fill in the necessary information for the operation, User ID, date then
+    If for work: Work ID
+    If for interest: Interest, Description, and then Interest ID
+7) If you registered as a faculty/student member, you may search and/or view. Select radio button
+8) Fill in necessary information information for the operations as well to search/view: WORK ID
+9) Dummy Data:
+    User ID's: 1,2,3 for Prof. Stan, Student Jessica, and Public Tom respectively
+    Interests ID's: 1, 2, 3 for Jessica, Tom, and Stan's interest respectively
+    Work ID's: 1, 2, 3, for Prof. Stan, Student Jessica, and Public Tom respectively
+10) To exit please close the main text box
