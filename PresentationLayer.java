@@ -26,12 +26,7 @@ public class PresentationLayer extends JFrame {
    JRadioButton UpWork ;
    JRadioButton delInt ;
    JRadioButton DelWork ;
-   // JPanel northPanel = new JPanel(new GridLayout(3,3));
-//    JPanel southPanel = new JPanel(new GridLayout(3,3));
-//    northPanel.add(np1, BorderLayout.NORTH);
-//    southPanel.add(np2, BorderLayout.SOUTH);
 
-   
    int userRole;
    String userId;
    
@@ -94,10 +89,19 @@ public class PresentationLayer extends JFrame {
                      System.out.println("User accepted");
                      
                      
-                     JPanel jpFaculty = new JPanel(new GridLayout(5,5));
-                     mainFrame.add( jpFaculty, BorderLayout.NORTH );
-                     JLabel jlbOperation     = new JLabel("Operation: ");
-                     JTextField jtfOp = new JTextField("Op");
+                     JPanel jpFaculty = new JPanel(new GridLayout(0,1));
+                     mainFrame.add( jpFaculty, BorderLayout.CENTER );
+                     
+                     JPanel jpButtons = new JPanel(new GridLayout(8,0));
+                     mainFrame.add ( jpButtons, BorderLayout.EAST );
+                     
+                     JPanel jpEnter = new JPanel(new GridLayout(1,0));
+                     mainFrame.add ( jpEnter, BorderLayout.SOUTH );
+                     
+                     JLabel title2 = new JLabel("Please enter an operation from the appropriate buttons: ");
+                     jpButtons.add( title2 );
+//                      JLabel jlbOperation     = new JLabel("Operation: ");
+//                      JTextField jtfOp = new JTextField("Op");
                      
                      JLabel jlbUserID  = new JLabel("User ID: ");
                      JTextField jtfUID = new JTextField("");
@@ -127,44 +131,81 @@ public class PresentationLayer extends JFrame {
                      delInt = new JRadioButton("Delete Interest ");
                      DelWork = new JRadioButton("Delete Work ");
                      ButtonGroup group = new ButtonGroup();
+                     group.add(insInt);
+                     group.add(UpWork);
+                     group.add(DelWork);
                      group.add(insWork);
                      group.add(upInt);
                      group.add(upAbs);
-                     group.add(UpWork);
                      group.add(delInt);
 
-                  
-                  
                      // //creating a drop-down menu of possible methods to call/select
-                  //                      //which enables all the correct fields and greys out the remaining                   
+                     //which enables all the correct fields and greys out the remaining                   
                      String[] choices = { "CHOICE 1", "CHOICE 2", "CHOICE 3" };
                      JComboBox<String> cb = new JComboBox<String>(choices);
                      cb.setVisible(true);
-//                      mainFrame.add(cb);
-//                      jpFaculty.add(cb);
                      
-                     jpFaculty.add(insInt);
-                     jpFaculty.add(insWork);
-                     jpFaculty.add(upInt);
-                     jpFaculty.add(upAbs);
-                     jpFaculty.add(UpWork);
-                     jpFaculty.add(delInt);
-                     jpFaculty.add(DelWork);
+                     jpButtons.add(insInt);
+                     jpButtons.add(insWork);
+                     jpButtons.add(upInt);
+                     jpButtons.add(upAbs);
+                     jpButtons.add(UpWork);
+                     jpButtons.add(delInt);
+                     jpButtons.add(DelWork);
                      
-                    
-                    // Thread insIntThread = new Thread();
-//                     insIntThread.start();
-                    //  boolean able = insInt.isEnabled();
-//                     //  while (
-//                      if(able == true){
-//                         jtfUID.setEditable(true);
-//                      } else if (able == false) {
-//                         jtfUID.setEditable(false);
-//                      }
+                     JButton jbEnter = new JButton("Enter");
+         jbEnter.addActionListener(
+            new ActionListener() { 
+               public void actionPerformed(ActionEvent e) { 
+                  System.out.println("Hello!");
+                  //if
+                  if(insInt.isSelected()){
+                     System.out.println("insInt");
+                     String text = jtfUID.getText();
+                     String text2 = jtfInt.getText();
+                     db.facultyInsertInterests(text, text2); //
                      
-                     jpFaculty.add(jlbOperation);
-                     jpFaculty.add(jtfOp);
+                  } else if(insWork.isSelected()){
+                     System.out.println("insWork");
+                     String text = jtfUID.getText();
+                     String text2 = jtfDesc.getText();
+                     String text3 = jtfDate.getText();
+                     db.facultyInsertWork(text, text2, text3); //
                      
+                  } else if(upInt.isSelected()){
+                     System.out.println("upInt");
+                     String text = jtfUID.getText();
+                     String text2 = jtfInt.getText();
+                     db.facultyUpdateInterests(text, text2); //
+                     
+                  } else if(upAbs.isSelected()){
+                     System.out.println("upAbs");
+                     String text = jtfUID.getText();
+                     String text2 = jtfDesc.getText();
+                     db.facultyUpdateAbstract(text, text2); //
+                     
+                  } else if(UpWork.isSelected()){
+                     System.out.println("UpWork");
+                     String text = jtfUID.getText();
+                     String text2 = jtfDate.getText();
+                     db.facultyUpdateWorkDate(text, text2); //
+                     
+                  } else if(delInt.isSelected()){
+                     System.out.println("delInt");
+                     String text = jtfUID.getText();
+                     String text2 = jtfIntID.getText();
+                     db.facultyDeleteInterest(text, text2);
+                     
+                  } else if(DelWork.isSelected()){
+                     System.out.println("DelWork");
+                     String text = jtfUID.getText();
+                     String text2 = jtfWID.getText();
+                     db.facultyDeleteWork(text, text2);
+                  }
+                  //end if
+               } });
+                     jpEnter.add(jbEnter);
+
                      jpFaculty.add(jlbUserID);
                      jpFaculty.add(jtfUID);
                      
@@ -186,9 +227,11 @@ public class PresentationLayer extends JFrame {
                      mainFrame.setDefaultCloseOperation( EXIT_ON_CLOSE );
                      mainFrame.pack();
                      mainFrame.setLocationRelativeTo( null );
-                     mainFrame.setSize( 700, 700 ); 
+                     mainFrame.setSize( 880, 350 ); 
                      mainFrame.setVisible( true );
                      
+                     
+
                   }
                   else if (userRole == 2){
                   
