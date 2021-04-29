@@ -214,9 +214,9 @@ public class DataLayer {
     * @return a String of all of their interests
     */
    public String searchUserInterest(String userId) {
-      String ans = "Inserts of User " + userId + ": ";
+      String ans = "Interests of User " + userId + ": ";
       try {
-         PreparedStatement stmt = conn.prepareStatement("SELECT interestId FROM user_interests WHERE userId = ?");
+         PreparedStatement stmt = conn.prepareStatement("SELECT interestId FROM user_interests WHERE " + userId + " = ?");
          stmt.setString(1, userId);
          rs = stmt.executeQuery();
          while (rs.next()) {
@@ -282,11 +282,11 @@ public class DataLayer {
     * @param interestId the interst being searched for
     * @return a string of the users 
     */
-   public String searchWorks(String workId) {
-      String ans = "Users with work " + workId + ": ";
+   public String searchWorks(String worksId) {
+      String ans = "Users with work ID - " + worksId + ": ";
       try {
-         PreparedStatement stmt = conn.prepareStatement("SELECT userId FROM works WHERE workId = ?");
-         stmt.setString(1, workId);
+         PreparedStatement stmt = conn.prepareStatement("SELECT userId FROM works WHERE " + worksId + " = ?");
+         stmt.setString(1, worksId);
          rs = stmt.executeQuery();
          while (rs.next()) {
             ans += rs.getString(1) + "\n";

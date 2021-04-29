@@ -193,11 +193,87 @@ public class PresentationLayer extends JFrame {
                   else if (userRole == 2){
                   
                   // if role is student
+                  // user can search and view
+                  System.out.println("User accepted");
+                     
+                     JPanel jpStudent = new JPanel(new GridLayout(2,2));
+                     mainFrame.add( jpStudent, BorderLayout.CENTER );
+                                          
+                     mainFrame.setDefaultCloseOperation( EXIT_ON_CLOSE );
+                     mainFrame.pack();
+                     mainFrame.setLocationRelativeTo( null );
+                     mainFrame.setSize( 500, 300 ); 
+                     mainFrame.setVisible( true );
+                     
+                     JLabel jlbUserID     = new JLabel("Which WorkID Do You Want to View? : ");
+                     JTextField jtfIntID = new JTextField("");
+                     jpStudent.add(jlbUserID);
+                     jpStudent.add(jtfIntID);
+                     JButton jbEnter = new JButton("Enter");
+                     jpStudent.add(jbEnter);
+                     jbEnter.addActionListener(
+                        new ActionListener() { 
+                        public void actionPerformed(ActionEvent e) { 
+                        String text = jtfIntID.getText();
+                     System.out.println(db.searchWorks(text)); 
+                     }
+                     });
+                     JLabel jlbInterestID     = new JLabel("Which InterestID Do You Want to View? : ");
+                     JTextField jtfInterestID = new JTextField("");
+                     jpStudent.add(jlbInterestID);
+                     jpStudent.add(jtfInterestID);
+                     JButton jbEnter_e = new JButton("Enter");
+                     jpStudent.add(jbEnter_e);
+                     jbEnter_e.addActionListener(
+                        new ActionListener() { 
+                        public void actionPerformed(ActionEvent e) { 
+                        String text_interest = jtfInterestID.getText();
+                     System.out.println(db.searchUserInterest(text_interest)); 
+                     }
+                     });
                   }
                   
                   else if (userRole == 3){
-                  
+                 
                   // if role is public
+                  // user can search and view
+                  System.out.println("User accepted");
+                     
+                     JPanel jpStudent = new JPanel(new GridLayout(2,2));
+                     mainFrame.add( jpStudent, BorderLayout.CENTER );
+                                          
+                     mainFrame.setDefaultCloseOperation( EXIT_ON_CLOSE );
+                     mainFrame.pack();
+                     mainFrame.setLocationRelativeTo( null );
+                     mainFrame.setSize( 500, 300 ); 
+                     mainFrame.setVisible( true );
+                     
+                     JLabel jlbUserID     = new JLabel("Which WorkID Do You Want to View? : ");
+                     JTextField jtfIntID = new JTextField("");
+                     jpStudent.add(jlbUserID);
+                     jpStudent.add(jtfIntID);
+                     JButton jbEnter = new JButton("Enter");
+                     jpStudent.add(jbEnter);
+                     jbEnter.addActionListener(
+                        new ActionListener() { 
+                        public void actionPerformed(ActionEvent e) { 
+                        String text = jtfIntID.getText();
+                     System.out.println(db.searchWorks(text)); 
+                     }
+                     });
+                     JLabel jlbInterestID     = new JLabel("Which InterestID Do You Want to View? : ");
+                     JTextField jtfInterestID = new JTextField("");
+                     jpStudent.add(jlbInterestID);
+                     jpStudent.add(jtfInterestID);
+                     JButton jbEnter_e = new JButton("Enter");
+                     jpStudent.add(jbEnter_e);
+                     jbEnter_e.addActionListener(
+                        new ActionListener() { 
+                        public void actionPerformed(ActionEvent e) { 
+                        String text_interest = jtfInterestID.getText();
+                     System.out.println(db.searchUserInterest(text_interest)); 
+                     }
+                     });
                   }
                   else{
                   
