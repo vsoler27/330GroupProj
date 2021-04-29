@@ -19,12 +19,17 @@ public class PresentationLayer extends JFrame {
    JFrame mainFrame = new JFrame();
    
    //buttons declared here
+   JRadioButton insInt ;
    JRadioButton insWork ;
    JRadioButton upInt ;
    JRadioButton upAbs ;
    JRadioButton UpWork ;
    JRadioButton delInt ;
    JRadioButton DelWork ;
+   // JPanel northPanel = new JPanel(new GridLayout(3,3));
+//    JPanel southPanel = new JPanel(new GridLayout(3,3));
+//    northPanel.add(np1, BorderLayout.NORTH);
+//    southPanel.add(np2, BorderLayout.SOUTH);
 
    
    int userRole;
@@ -89,7 +94,7 @@ public class PresentationLayer extends JFrame {
                      System.out.println("User accepted");
                      
                      
-                     JPanel jpFaculty = new JPanel(new GridLayout(3,4));
+                     JPanel jpFaculty = new JPanel(new GridLayout(5,5));
                      mainFrame.add( jpFaculty, BorderLayout.NORTH );
                      JLabel jlbOperation     = new JLabel("Operation: ");
                      JTextField jtfOp = new JTextField("Op");
@@ -114,6 +119,7 @@ public class PresentationLayer extends JFrame {
                      JTextField jtfWID = new JTextField("");
                      
                      //buttons
+                     insInt = new JRadioButton("Insert Interests");
                      insWork = new JRadioButton("Insert work");
                      upInt = new JRadioButton("Update Interests");
                      upAbs = new JRadioButton("Update Abstract");
@@ -134,14 +140,27 @@ public class PresentationLayer extends JFrame {
                      String[] choices = { "CHOICE 1", "CHOICE 2", "CHOICE 3" };
                      JComboBox<String> cb = new JComboBox<String>(choices);
                      cb.setVisible(true);
-                     mainFrame.add(cb);
+//                      mainFrame.add(cb);
+//                      jpFaculty.add(cb);
                      
-                     mainFrame.add(insWork);
-                     mainFrame.add(upInt);
-                     mainFrame.add(upAbs);
-                     mainFrame.add(UpWork);
-                     mainFrame.add(delInt);
-                     mainFrame.add(DelWork);
+                     jpFaculty.add(insInt);
+                     jpFaculty.add(insWork);
+                     jpFaculty.add(upInt);
+                     jpFaculty.add(upAbs);
+                     jpFaculty.add(UpWork);
+                     jpFaculty.add(delInt);
+                     jpFaculty.add(DelWork);
+                     
+                    
+                    // Thread insIntThread = new Thread();
+//                     insIntThread.start();
+                    //  boolean able = insInt.isEnabled();
+//                     //  while (
+//                      if(able == true){
+//                         jtfUID.setEditable(true);
+//                      } else if (able == false) {
+//                         jtfUID.setEditable(false);
+//                      }
                      
                      jpFaculty.add(jlbOperation);
                      jpFaculty.add(jtfOp);
@@ -164,15 +183,11 @@ public class PresentationLayer extends JFrame {
                      jpFaculty.add(jlbWorkID);
                      jpFaculty.add(jtfWID);
                      
-                     
                      mainFrame.setDefaultCloseOperation( EXIT_ON_CLOSE );
                      mainFrame.pack();
                      mainFrame.setLocationRelativeTo( null );
-                     mainFrame.setSize( 500, 300 ); 
+                     mainFrame.setSize( 700, 700 ); 
                      mainFrame.setVisible( true );
-                     
-                     
-                     
                      
                   }
                   else if (userRole == 2){
