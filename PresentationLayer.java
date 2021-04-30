@@ -26,7 +26,16 @@ public class PresentationLayer extends JFrame {
    JRadioButton UpWork ;
    JRadioButton delInt ;
    JRadioButton DelWork ;
+   JRadioButton SUI;
+   JRadioButton SI;
+   JRadioButton SUW;
+   JRadioButton SW;
+   // JPanel northPanel = new JPanel(new GridLayout(3,3));
+//    JPanel southPanel = new JPanel(new GridLayout(3,3));
+//    northPanel.add(np1, BorderLayout.NORTH);
+//    southPanel.add(np2, BorderLayout.SOUTH);
 
+   
    int userRole;
    String userId;
    
@@ -229,53 +238,104 @@ public class PresentationLayer extends JFrame {
                      mainFrame.setLocationRelativeTo( null );
                      mainFrame.setSize( 880, 350 ); 
                      mainFrame.setVisible( true );
-                     
-                     
 
                   }
                   else if (userRole == 2){
                   
                   // if role is student
                   // user can search and view
-                  System.out.println("User accepted");
+                 System.out.println("User accepted");
                      
-                     JPanel jpStudent = new JPanel(new GridLayout(2,2));
+                     
+                     JPanel jpStudent = new JPanel(new GridLayout(0,1));
                      mainFrame.add( jpStudent, BorderLayout.CENTER );
+                     
+                     JPanel jpButtons = new JPanel(new GridLayout(8,0));
+                     mainFrame.add ( jpButtons, BorderLayout.EAST );
+                     
+                     JPanel jpEnter = new JPanel(new GridLayout(1,0));
+                     mainFrame.add ( jpEnter, BorderLayout.SOUTH );
+                     
+                     JLabel title2 = new JLabel("Please enter an operation from the appropriate buttons: ");
+                     jpButtons.add( title2 );
+                     
+                     JLabel jlbUserID  = new JLabel("User ID: ");
+                     JTextField jtfUID = new JTextField("");
+                     
+                     JLabel jlbInterestID     = new JLabel("Interest ID: ");
+                     JTextField jtfIntID = new JTextField("");
+                     
+                     JLabel jlbWorkID     = new JLabel("Work ID: ");
+                     JTextField jtfWID = new JTextField("");
+                     
+                     //buttons
+                     SUI = new JRadioButton("Search User Interests");
+                     SI = new JRadioButton("Search Interests");
+                     SUW = new JRadioButton("Search User Work");
+                     SW = new JRadioButton("Search Work");
+                     
+                     ButtonGroup group = new ButtonGroup();
+                     group.add(SUI);
+                     group.add(SI);
+                     group.add(SUW);
+                     group.add(SW);
+
+                     // //creating a drop-down menu of possible methods to call/select
+                     //which enables all the correct fields and greys out the remaining                   
+                     
+                     jpButtons.add(SUI);
+                     jpButtons.add(SI);
+                     jpButtons.add(SUW);
+                     jpButtons.add(SW);
+
+                     
+                     JButton jbEnter = new JButton("Enter");
+         jbEnter.addActionListener(
+            new ActionListener() { 
+               public void actionPerformed(ActionEvent e) { 
+                  System.out.println("Hello!");
+                  //if
+                  if(SUI.isSelected()){
+                     System.out.println("SUI");
+                     String text = jtfUID.getText();
+                     db.searchUserInterest(text); //
+                     
+                  } else if(SI.isSelected()){
+                     System.out.println("SI");
+                     String text = jlbInterestID.getText();
+                     db.searchInterests(text); //
+                     
+                  } else if(SUW.isSelected()){
+                     System.out.println("SUW");
+                     String text = jtfUID.getText();
+                     db.searchUserWork(text); //
+                     
+                  } else if(SW.isSelected()){
+                     System.out.println("WID");
+                     String text = jtfWID.getText();
+                     db.searchWorks(text); //
+                     }
+                                 //end if
+                    
+                    
+               } });
+                     jpEnter.add(jbEnter);
+
+                     jpStudent.add(jlbUserID);
+                     jpStudent.add(jtfUID);
                                           
+                     jpStudent.add(jlbInterestID);
+                     jpStudent.add(jtfIntID);
+                     
+                     jpStudent.add(jlbWorkID);
+                     jpStudent.add(jtfWID);
+                     
                      mainFrame.setDefaultCloseOperation( EXIT_ON_CLOSE );
                      mainFrame.pack();
                      mainFrame.setLocationRelativeTo( null );
-                     mainFrame.setSize( 500, 300 ); 
-                     mainFrame.setVisible( true );
-                     
-                     JLabel jlbUserID     = new JLabel("Which WorkID Do You Want to View? : ");
-                     JTextField jtfIntID = new JTextField("");
-                     jpStudent.add(jlbUserID);
-                     jpStudent.add(jtfIntID);
-                     JButton jbEnter = new JButton("Enter");
-                     jpStudent.add(jbEnter);
-                     jbEnter.addActionListener(
-                        new ActionListener() { 
-                        public void actionPerformed(ActionEvent e) { 
-                        String text = jtfIntID.getText();
-                     System.out.println(db.searchWorks(text)); 
-                     }
-                     });
-                     JLabel jlbInterestID     = new JLabel("Which InterestID Do You Want to View? : ");
-                     JTextField jtfInterestID = new JTextField("");
-                     jpStudent.add(jlbInterestID);
-                     jpStudent.add(jtfInterestID);
-                     JButton jbEnter_e = new JButton("Enter");
-                     jpStudent.add(jbEnter_e);
-                     jbEnter_e.addActionListener(
-                        new ActionListener() { 
-                        public void actionPerformed(ActionEvent e) { 
-                        String text_interest = jtfInterestID.getText();
-                     System.out.println(db.searchUserInterest(text_interest)); 
-                     }
-                     });
-                  }
-                  
+                     mainFrame.setSize( 880, 350 ); 
+                     mainFrame.setVisible( true ); 
+                  }                 
                   else if (userRole == 3){
                  
                   // if role is public
