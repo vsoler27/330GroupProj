@@ -30,6 +30,8 @@ public class PresentationLayer extends JFrame {
    JRadioButton SI;
    JRadioButton SUW;
    JRadioButton SW;
+         
+
    // JPanel northPanel = new JPanel(new GridLayout(3,3));
 //    JPanel southPanel = new JPanel(new GridLayout(3,3));
 //    northPanel.add(np1, BorderLayout.NORTH);
@@ -109,8 +111,8 @@ public class PresentationLayer extends JFrame {
                      
                      JLabel title2 = new JLabel("Please enter an operation from the appropriate buttons: ");
                      jpButtons.add( title2 );
-//                      JLabel jlbOperation     = new JLabel("Operation: ");
-//                      JTextField jtfOp = new JTextField("Op");
+                  //                      JLabel jlbOperation     = new JLabel("Operation: ");
+                  //                      JTextField jtfOp = new JTextField("Op");
                      
                      JLabel jlbUserID  = new JLabel("User ID: ");
                      JTextField jtfUID = new JTextField("");
@@ -147,7 +149,7 @@ public class PresentationLayer extends JFrame {
                      group.add(upInt);
                      group.add(upAbs);
                      group.add(delInt);
-
+                  
                      // //creating a drop-down menu of possible methods to call/select
                      //which enables all the correct fields and greys out the remaining                   
                      String[] choices = { "CHOICE 1", "CHOICE 2", "CHOICE 3" };
@@ -163,58 +165,58 @@ public class PresentationLayer extends JFrame {
                      jpButtons.add(DelWork);
                      
                      JButton jbEnter = new JButton("Enter");
-         jbEnter.addActionListener(
-            new ActionListener() { 
-               public void actionPerformed(ActionEvent e) { 
-                  System.out.println("Hello!");
-                  //if
-                  if(insInt.isSelected()){
-                     System.out.println("insInt");
-                     String text = jtfUID.getText();
-                     String text2 = jtfInt.getText();
-                     db.facultyInsertInterests(text, text2); //
-                     
-                  } else if(insWork.isSelected()){
-                     System.out.println("insWork");
-                     String text = jtfUID.getText();
-                     String text2 = jtfDesc.getText();
-                     String text3 = jtfDate.getText();
-                     db.facultyInsertWork(text, text2, text3); //
-                     
-                  } else if(upInt.isSelected()){
-                     System.out.println("upInt");
-                     String text = jtfUID.getText();
-                     String text2 = jtfInt.getText();
-                     db.facultyUpdateInterests(text, text2); //
-                     
-                  } else if(upAbs.isSelected()){
-                     System.out.println("upAbs");
-                     String text = jtfUID.getText();
-                     String text2 = jtfDesc.getText();
-                     db.facultyUpdateAbstract(text, text2); //
-                     
-                  } else if(UpWork.isSelected()){
-                     System.out.println("UpWork");
-                     String text = jtfUID.getText();
-                     String text2 = jtfDate.getText();
-                     db.facultyUpdateWorkDate(text, text2); //
-                     
-                  } else if(delInt.isSelected()){
-                     System.out.println("delInt");
-                     String text = jtfUID.getText();
-                     String text2 = jtfIntID.getText();
-                     db.facultyDeleteInterest(text, text2);
-                     
-                  } else if(DelWork.isSelected()){
-                     System.out.println("DelWork");
-                     String text = jtfUID.getText();
-                     String text2 = jtfWID.getText();
-                     db.facultyDeleteWork(text, text2);
-                  }
-                  //end if
-               } });
+                     jbEnter.addActionListener(
+                        new ActionListener() { 
+                           public void actionPerformed(ActionEvent e) { 
+                              System.out.println("Hello!");
+                           //if
+                              if(insInt.isSelected()){
+                                 System.out.println("insInt");
+                                 String text = jtfUID.getText();
+                                 String text2 = jtfInt.getText();
+                                 db.facultyInsertInterests(text, text2); //
+                              
+                              } else if(insWork.isSelected()){
+                                 System.out.println("insWork");
+                                 String text = jtfUID.getText();
+                                 String text2 = jtfDesc.getText();
+                                 String text3 = jtfDate.getText();
+                                 db.facultyInsertWork(text, text2, text3); //
+                              
+                              } else if(upInt.isSelected()){
+                                 System.out.println("upInt");
+                                 String text = jtfUID.getText();
+                                 String text2 = jtfInt.getText();
+                                 db.facultyUpdateInterests(text, text2); //
+                              
+                              } else if(upAbs.isSelected()){
+                                 System.out.println("upAbs");
+                                 String text = jtfUID.getText();
+                                 String text2 = jtfDesc.getText();
+                                 db.facultyUpdateAbstract(text, text2); //
+                              
+                              } else if(UpWork.isSelected()){
+                                 System.out.println("UpWork");
+                                 String text = jtfUID.getText();
+                                 String text2 = jtfDate.getText();
+                                 db.facultyUpdateWorkDate(text, text2); //
+                              
+                              } else if(delInt.isSelected()){
+                                 System.out.println("delInt");
+                                 String text = jtfUID.getText();
+                                 String text2 = jtfIntID.getText();
+                                 db.facultyDeleteInterest(text, text2);
+                              
+                              } else if(DelWork.isSelected()){
+                                 System.out.println("DelWork");
+                                 String text = jtfUID.getText();
+                                 String text2 = jtfWID.getText();
+                                 db.facultyDeleteWork(text, text2);
+                              }
+                           //end if
+                           } });
                      jpEnter.add(jbEnter);
-
+                  
                      jpFaculty.add(jlbUserID);
                      jpFaculty.add(jtfUID);
                      
@@ -238,14 +240,15 @@ public class PresentationLayer extends JFrame {
                      mainFrame.setLocationRelativeTo( null );
                      mainFrame.setSize( 880, 350 ); 
                      mainFrame.setVisible( true );
-
+                  
                   }
                   else if (userRole == 2){
                   
                   // if role is student
                   // user can search and view
-                 System.out.println("User accepted");
+                     System.out.println("User accepted");
                      
+
                      
                      JPanel jpStudent = new JPanel(new GridLayout(0,1));
                      mainFrame.add( jpStudent, BorderLayout.CENTER );
@@ -279,7 +282,7 @@ public class PresentationLayer extends JFrame {
                      group.add(SI);
                      group.add(SUW);
                      group.add(SW);
-
+                  
                      // //creating a drop-down menu of possible methods to call/select
                      //which enables all the correct fields and greys out the remaining                   
                      
@@ -287,40 +290,48 @@ public class PresentationLayer extends JFrame {
                      jpButtons.add(SI);
                      jpButtons.add(SUW);
                      jpButtons.add(SW);
-
+                  
                      
                      JButton jbEnter = new JButton("Enter");
-         jbEnter.addActionListener(
-            new ActionListener() { 
-               public void actionPerformed(ActionEvent e) { 
-                  System.out.println("Hello!");
-                  //if
-                  if(SUI.isSelected()){
-                     System.out.println("SUI");
-                     String text = jtfUID.getText();
-                     db.searchUserInterest(text); //
-                     
-                  } else if(SI.isSelected()){
-                     System.out.println("SI");
-                     String text = jlbInterestID.getText();
-                     db.searchInterests(text); //
-                     
-                  } else if(SUW.isSelected()){
-                     System.out.println("SUW");
-                     String text = jtfUID.getText();
-                     db.searchUserWork(text); //
-                     
-                  } else if(SW.isSelected()){
-                     System.out.println("WID");
-                     String text = jtfWID.getText();
-                     db.searchWorks(text); //
-                     }
+                     jbEnter.addActionListener(
+                        new ActionListener() { 
+                           public void actionPerformed(ActionEvent e) { 
+                              System.out.println("Hello!");
+                           //if
+                              if(SUI.isSelected()){
+                                 System.out.println("SUI");
+                                 String text = jtfUID.getText();
+                                 //db.searchUserInterest(text); //
+                                 String returns = db.searchUserInterest(text);
+                                 System.out.println("Selected User Interests: " + returns);
+                              
+                              } else if(SI.isSelected()){
+                                 System.out.println("SI");
+                                 String text = jlbInterestID.getText();
+                                 //db.searchInterests(text); //
+                                 String returns = db.searchInterests(text);
+                                 System.out.println("Selected Interests: " + returns);
+                              
+                              } else if(SUW.isSelected()){
+                                 System.out.println("SUW");
+                                 String text = jtfUID.getText();
+                                 //db.searchUserWork(text); //
+                                 String returns = db.searchUserWork(text);
+                                 System.out.println("Selected User Works: " + returns);
+                              
+                              } else if(SW.isSelected()){
+                                 System.out.println("WID");
+                                 String text = jtfWID.getText();
+                                 //db.searchWorks(text); //
+                                 String returns = db.searchWorks(text);
+                                 System.out.println("Selected Works: " + returns);
+                              }
                                  //end if
-                    
-                    
-               } });
+                           
+                           
+                           } });
                      jpEnter.add(jbEnter);
-
+                  
                      jpStudent.add(jlbUserID);
                      jpStudent.add(jtfUID);
                                           
@@ -337,10 +348,10 @@ public class PresentationLayer extends JFrame {
                      mainFrame.setVisible( true ); 
                   }                 
                   else if (userRole == 3){
-                 
+                  
                   // if role is public
                   // user can search and view
-                  System.out.println("User accepted");
+                     System.out.println("User accepted");
                      
                      JPanel jpStudent = new JPanel(new GridLayout(2,2));
                      mainFrame.add( jpStudent, BorderLayout.CENTER );
@@ -359,11 +370,11 @@ public class PresentationLayer extends JFrame {
                      jpStudent.add(jbEnter);
                      jbEnter.addActionListener(
                         new ActionListener() { 
-                        public void actionPerformed(ActionEvent e) { 
-                        String text = jtfIntID.getText();
-                     System.out.println(db.searchWorks(text)); 
-                     }
-                     });
+                           public void actionPerformed(ActionEvent e) { 
+                              String text = jtfIntID.getText();
+                              System.out.println(db.searchWorks(text)); 
+                           }
+                        });
                      JLabel jlbInterestID     = new JLabel("Which InterestID Do You Want to View? : ");
                      JTextField jtfInterestID = new JTextField("");
                      jpStudent.add(jlbInterestID);
@@ -372,11 +383,11 @@ public class PresentationLayer extends JFrame {
                      jpStudent.add(jbEnter_e);
                      jbEnter_e.addActionListener(
                         new ActionListener() { 
-                        public void actionPerformed(ActionEvent e) { 
-                        String text_interest = jtfInterestID.getText();
-                     System.out.println(db.searchUserInterest(text_interest)); 
-                     }
-                     });
+                           public void actionPerformed(ActionEvent e) { 
+                              String text_interest = jtfInterestID.getText();
+                              System.out.println(db.searchUserInterest(text_interest)); 
+                           }
+                        });
                   }
                   else{
                   
